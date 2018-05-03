@@ -1,0 +1,158 @@
+<include file="Common/meta" />
+<script src="__PUBLIC__/lib/jquery/jquery-1.10.2.js"></script> 
+<script src="__PUBLIC__/lib/morris/raphael-2.1.0.min.js"></script>
+<script src="__PUBLIC__/lib/morris/morris.js"></script>
+<script src="__PUBLIC__/lib/ichart/ichart.1.2.1.min.js"></script>
+
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 成员管理 
+	<span class="c-gray en">&gt;</span> 成员列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		
+	</div>
+<!--     <div class="cl pd-5 bg-1 bk-gray mt-20"> 
+    <span class="l">
+            delete
+            <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+            <i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+            add
+            <a href="{:U('Member/member_add')}" class="btn btn-success more_coupon">添加成员</a>
+        </span> 
+        total
+        <span class="r" style="line-height:30px;">
+            共有数据&nbsp;&nbsp;
+            <strong>{$member.total}</strong>&nbsp;&nbsp;条
+        </span>
+</div> -->
+
+<!-- 图表开始 -->
+<div id="page-wrapper" style="margin:20px 20px;">
+<div id="page-inner"> 
+    <div class="row">
+<!-- Advanced Tables -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            月份绩效
+        </div>
+        <div class="panel-body">                            
+            <div id="morris-bar-chart"></div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {:(int)date('m',time())}月份支出和利润比例
+        </div>
+        <div class="panel-body">                            
+            <div id="morris-donut-chart"></div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            年度利润支出走势
+        </div>
+        <div class="panel-body">                            
+            <div id="morris-line-chart"></div>
+            <div id="canvasDiv"></div>
+        </div>
+    </div>     
+    </div>
+</div>
+</div>
+
+
+<script>
+window.onload=function(){
+    Morris.Bar({
+	    element: 'morris-bar-chart',
+	    data: [
+	    <?php
+	        for($i = 1;$i <= 12;$i++){
+	            $earn = $data[$i]['allprice'];
+	            $cost = $data[$i]['notbill'];
+	            if($earn == ''){
+	                $earn = '0';
+	            }
+	            if($cost == ''){
+	                $cost = '0';
+	            }
+	            echo "{y:'$i'+'月份',a:'$earn',b:'$cost'},";
+	        }
+	    ?>
+	    ],
+	    xkey: 'y',
+	    ykeys: ['a', 'b'],
+	    labels: ['总收入', '未收款'],
+                 barColors: [
+    '#A6A6A6','#F09B22',
+    '#A8E9DC' 
+  ],
+        hideHover: 'auto',
+        resize: true
+    });
+
+    /*  Morris.Donut({
+        element: 'morris-donut-chart',
+        data: [{
+            label: "支出\n{$percent.monthcost}%",
+            value: "{$pay.monthcost}"
+        }, {
+            label: "利润\n{$percent.profit}%",
+            value: "{$pay.profit}"
+        }],
+        colors: [
+    '#A6A6A6','#F09B22',
+    '#A8E9DC' 
+  ],
+    resize: true
+});*/
+
+/*Morris.Bar({
+    element: 'morris-line-chart',
+    data: [
+    <?php
+        for($i = 1;$i <= 12;$i++){
+            $earn = $data[$i]['profit'];
+            $cost = $data[$i]['cost'];
+            if($earn == ''){
+                $earn = '0';
+            }
+            if($cost == ''){
+                $cost = '0';
+            }
+            echo "{y:'$i'+'月份',a:'$earn',b:'$cost'},";
+        }
+    ?>
+    ],
+    xkey: 'y',
+    ykeys: ['a', 'b'],
+    labels: ['利润', '支出'],
+     barColors: [
+    '#A6A6A6','#F09B22',
+    '#A8E9DC' 
+  ],
+    hideHover: 'auto',
+    resize: true
+});*/
+
+}
+</script>
+<!-- 图表结束 -->
+
+</div>
+</body>
+</html>
+
+

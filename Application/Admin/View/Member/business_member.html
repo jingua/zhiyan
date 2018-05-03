@@ -1,0 +1,146 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 成员管理 
+	<span class="c-gray en">&gt;</span> 成员列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		<form action="{:U('Member/business_member')}" method="post">
+		<!-- date -->
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" name="from" 
+		style="width:200px;" value="{$from}"> 
+		-
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$to}" 
+		style="width:200px;" name="to">
+		<!-- button -->
+		<button type="submit" class="btn btn-success radius" id="sousuo_user">
+		<i class="Hui-iconfont">&#xe665;</i> 指标统计</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20" style="margin-top:6px;"> 
+		<span class="l">
+			<!-- add -->
+			<a href="javascript:;" class="btn btn-success">成员指标统计</a>
+			<a href="javascript:;" class="btn btn-warning radius excel_down_xls">导出表格</a>
+		</span> 
+		<!-- total -->
+		<span class="r" style="line-height:30px;">
+			共有数据&nbsp;&nbsp;
+			<strong><?php echo count($business);?></strong>&nbsp;&nbsp;条
+		</span> 
+	</div>
+	<div class="mt-20" style="margin-top:10px;">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<!-- <th width="40"><input type="checkbox" name="" value=""></th> -->
+				<th>ID</th>
+				<th>名字</th>
+				<th>发放</th>
+				<th>待申请</th>
+				<th>历史指标数</th>
+			</tr>
+		</thead> 
+		<tbody id="ks_user">
+			<foreach name="business" item="v">
+			<tr class="text-c">
+				<td>{$v.member_id}</td>
+				<td>{$v.member_name}</td>
+				<td>
+					<?php echo round($v['num'],2);?>
+				</td>
+				<td>
+					<?php echo round($v['noNum'],2);?>
+				</td>
+				<td>
+					<?php echo round($v['noNum'],2)+round($v['num'],2);?>
+				</td>
+			</tr> 
+			</foreach>
+
+			<tr class="text-c">
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr> 
+			<foreach name="member" item="v2">
+			<tr class="text-c">
+				<td>{$v2.member_id}+{$v2.parent_id}</td>
+				<td>{$v2.member_name}+{$v2.parent_name}</td>
+				<td>
+					<?php echo round($v2['num'],2);?>
+				</td>
+				<td>
+					<?php echo round($v2['noNum'],2);?>
+				</td>
+				<td>
+					<?php echo round($v2['noNum'],2)+round($v2['num'],2);?>
+				</td>
+			</tr> 
+			</foreach>
+			<tr><td colspan=13 style="text-align:center;"></td></tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<!-- common -->
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+/*
+ * 绑定关系
+ * xiami
+ * 2018-04-03
+*/
+function member_parent(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+var page_url = {
+    'save_del' : "{:U('Member/member_del')}",
+    'list_url' : "{:U('Member/member_list')}",
+}
+
+/*
+ * 导出表格
+ * xiami
+ * 2018-04-03
+*/
+$(".excel_down_xls").click(function(){
+    var from = $("input[name=from]").val();
+    var to = $("input[name=to]").val();
+    if(from.length == 0){
+	   layer.alert('请选择时间',{icon:2,time:2000});
+	   return false;
+	}
+	 if(to.length == 0){
+	   layer.alert('请选择时间',{icon:2,time:2000});
+	   return false;
+	}
+    window.location.href="__URL__/excel.html&from=" + from + '&to=' + to;    
+});
+
+
+</script>

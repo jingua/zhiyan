@@ -1,0 +1,128 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 权限管理 
+	<span class="c-gray en">&gt;</span> 角色列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		<form action="{:U('Node/node_list')}" method="post">
+		<!-- text -->
+		<input type="text" class="input-text" style="width:240px" value="{$node.node_name}"
+		placeholder="&nbsp;输入节点名称" name="node_name">
+		<!-- date -->
+		<input type="text" value="{$node.from}" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" 
+		style="width:180px;" name="from" placeholder="&nbsp;请选择添加时间"> 
+		-
+	    <input type="text" value="{$node.to}" 
+	    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+	    id="datemin" class="input-text Wdate" 
+	    style="width:180px;" name="to" placeholder="&nbsp;请选择添加时间">
+	    <!-- button -->
+		<button type="submit" class="btn btn-success radius" id="search_key">搜节点</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20" style="margin-top:5px;"> 
+		<span class="l">
+			<!-- delete -->
+			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+			<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
+			<!-- add -->
+			<a class="btn btn-success radius" href="{:U('Node/node_add')}">添加节点</a>
+		</span> 
+		<!-- total -->
+		<span class="r" style="line-height:28px;">
+			共有数据&nbsp;&nbsp;
+			<strong>{$node.count}</strong>&nbsp;&nbsp;条
+		</span> 
+	</div>
+	<div class="mt-20" style="margin-top:10px;">
+		<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="40"><input type="checkbox" name="" value=""></th>
+					<th>ID</th>
+					<th>节点名称</th>
+					<th>节点描述</th>
+					<th>排序</th>
+					<th>添加时间</th>
+					<th width="120">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+			<foreach name="node.node" item="v1">
+				<tr class="text-c">
+					<td>
+						<input type="checkbox" value="{$v1.node_id}" name="dataid" 
+						id="dataid" _id="{$v1.node_id}">
+					</td>
+					<td>{$v1.node_id}</td>
+					<td style="color:red;font-weight:700" class="text-l">{$v1.node_name}Action</td>
+					<td style="padding-left:12px;color:red;font-weight:500;" class="text-l">{$v1.node_descr}</td>
+					<td>{$v1.node_sort}</td>
+					<td>{$v1.node_time}</td>
+					<td class="f-14 td-manage">
+						<!-- edit -->
+						<a style="text-decoration:none" class="ml-5" 
+						href="{:U('Node/node_mod',array('node_id'=>$v1['node_id']))}" title="编辑">
+						<i class="Hui-iconfont">&#xe6df;</i></a> 
+						<!-- delete -->
+						<a style="text-decoration:none" class="ml-5" 
+						onClick="del(this,{$v1['node_id']})" href="javascript:;" title="删除">
+						<i class="Hui-iconfont">&#xe6e2;</i></a>
+					</td>
+				</tr>
+					<foreach name="v1['actions']" item="v2">
+						<tr class="text-c">
+							<td>
+								<input type="checkbox" value="{$v2.node_id}" name="dataid" 
+								id="dataid" _id="{$v2.node_id}">
+							</td>
+							<td>{$v2.node_id}</td>
+							<td style="padding-left:48px;" class="text-l">{$v2.node_name}</td>
+							<td style="padding-left:48px;" class="text-l">{$v2.node_descr}</td>
+							<td>{$v2.node_sort}</td>
+							<td>{$v2.node_time}</td>
+							<td class="f-14 td-manage">
+								<!-- edit -->
+								<a style="text-decoration:none" class="ml-5" 
+								href="{:U('Node/node_mod',array('node_id'=>$v2['node_id']))}" title="编辑">
+								<i class="Hui-iconfont">&#xe6df;</i></a> 
+								<!-- delete -->
+								<a style="text-decoration:none" class="ml-5" 
+								onClick="del(this,{$v2['node_id']})" href="javascript:;" title="删除">
+								<i class="Hui-iconfont">&#xe6e2;</i></a>
+							</td>
+						</tr>
+					</foreach>
+			</foreach>
+					<tr><td colspan="8" class="text-c">{$node.link}</td></tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+    'save_del' : "{:U('Node/node_del')}",
+    'list_url' : "{:U('Node/node_list')}",
+}
+</script>

@@ -1,0 +1,85 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 
+    <span class="c-gray en">&gt;</span> 权限管理 
+    <span class="c-gray en">&gt;</span> 编辑节点
+    <!-- 刷新 -->
+    <a class="btn btn-success radius r" 
+        style="line-height:1.6em;margin-top:3px" 
+        href="javascript:location.replace(location.href);" title="刷新" >
+        <i class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<!-- content -->
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add" method="post" enctype="multipart/form-data">
+		<!-- select -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" style="width:150px;">控制器名称</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="node_pid" class="select">
+					<foreach name="actions" item="v">
+						<if condition="$v['node_id']==$node['node_pid']">
+			            	<option value="{$v.node_id}" selected="selected">
+			            	{$v.node_name}Action-{$v.node_descr}</option>
+			            <else />	
+			            	<option value="{$v.node_id}" 
+			            	<eq name='v.node_id' value='$node.node_id'>selected</eq>>
+			            	{$v.node_name}Action-{$v.node_descr}</option>
+			            </if>	
+		            </foreach>
+				</select>
+				</span> 
+			</div>
+		</div>
+		<!-- text -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" style="width:150px;">节点名称</label>
+			<div class="formControls col-xs-8 col-sm-9">
+			<input type="text" class="input-text" value="{$node.node_name}" 
+			placeholder="" id="node_name" name="node_name">
+			</div>
+		</div>
+		<!-- text -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" style="width:150px;">节点描述</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$node.node_descr}" 
+				placeholder="" id="node_descr" name="node_descr">
+				<input type="hidden" name="node_id" value="{$node.node_id}">
+			</div>
+		</div>
+		<!-- text -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" style="width:150px;">排序</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$node.node_sort}" 
+				placeholder="" id="node_sort" name="node_sort">
+			</div>
+		</div>
+		<!-- button -->
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button class="btn btn-primary radius btn_submit" type="button">
+                <i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+                <button onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;</button>
+            </div>
+        </div>
+	</form>
+</article>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Node/node_edit')}",
+    'list_url' : "{:U('Node/node_list')}",
+}
+</script>

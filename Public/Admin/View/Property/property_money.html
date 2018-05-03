@@ -1,0 +1,64 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 
+    <span class="c-gray en">&gt;</span> 用户管理 
+    <span class="c-gray en">&gt;</span> 用户列表 
+    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+    href="javascript:location.replace(location.href);" title="刷新" >
+    <i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin:10px 60px;">
+    <h1>数据统计</h1>
+<div id="graph" style="width:1200px;"></div>
+<div id="code" class="prettyprint linenums"></div> 
+</div>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+  <script src="__PUBLIC__/lib/tu/morris.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.js"></script>
+  <script src="__PUBLIC__/lib/tu/example.js"></script>
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/prettify/r224/prettify.min.css">
+  <link rel="stylesheet" href="__PUBLIC__/lib/tu/morris.css">
+
+<script>
+/*
+<?php
+    for($i = 1;$i <= 12;$i++){
+        $earn = $data[$i]['allprice'];
+        $cost = $data[$i]['notbill'];
+        if($earn == ''){
+            $earn = '0';
+        }
+        if($cost == ''){
+            $cost = '0';
+        }
+        echo "{y:'$i'+'月份',a:'$earn',b:'$cost'},";
+    }
+?>
+*/
+Morris.Bar({
+  element: 'graph',
+
+  data: [
+    <?php foreach($data as $v){ ?>
+    {x: <?php echo $v['yue'];?>, y: <?php echo $v['total'];?>, z: <?php echo $v['fks']?>},
+    <?php } ?>
+  ],
+  xkey: 'x',
+  ykeys: ['y', 'z'],
+  labels: ['总收入', '未收款'],
+  barColors: [
+    '#A6A6A6','#F09B22',
+    '#A8E9DC' 
+  ],
+        hideHover: 'auto',
+        resize: true
+});
+</script>
+</body>
+</html>

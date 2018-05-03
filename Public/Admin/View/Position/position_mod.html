@@ -1,0 +1,64 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 系统设置
+  	<span class="c-gray en">&gt;</span> 编辑职位
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">职位名称</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="{$position.position_name}" placeholder="请输入职位名称" 
+  				id="position_name" name="position_name">
+  			</div>
+  		</div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">排序</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$position.position_sort}" placeholder="" 
+          id="position_sort" name="position_sort">
+          <input type="hidden" name="position_id" value="{$position.position_id}">
+        </div>
+      </div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          <button 
+              onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;
+          </button>
+          </div>
+      </div>
+
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+
+<script>
+/* 提交数据 */
+var page_url = {
+    'save_url' : "{:U('Position/position_mod_save')}",
+    'list_url' : "{:U('Position/position_list')}",
+}
+</script>

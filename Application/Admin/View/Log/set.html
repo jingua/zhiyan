@@ -1,0 +1,276 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 系统配置 
+	<span class="c-gray en">&gt;</span> 基本配置 
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+	href="javascript:location.replace(location.href);" title="刷新" >
+	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form class="form form-horizontal" id="form-article-add">
+		<!-- 系统设置内容 -->
+		<div id="tab-system" class="HuiTab">
+			<div class="tabBar cl">
+				<span>基本设置</span>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">&nbsp;</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					个人指标设置&nbsp;&nbsp;默认值从&nbsp; 0 &nbsp;开始与对应绩效奖励金额
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">指标开始刚到结束个数值</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" id="left1" name="left1" placeholder="" value="{$one.left}" class="input-text" style="width:180px;">&nbsp;
+					<input type="text" id="left1_money" name="left1_money" placeholder="请输入绩效金额" value="{$one.left_money}" class="input-text" style="width:180px;">&nbsp;
+					<button class="btn btn-default radius" type="button" id="one1">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">指标开始刚到结束个数值</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" id="middle1" name="middle1" placeholder="" value="{$one.middle}" class="input-text" style="width:180px;">&nbsp;
+					<input type="text" id="middle1_money" name="middle1_money" placeholder="请输入绩效金额" value="{$one.middle_money}" class="input-text" style="width:180px;">&nbsp;
+					<button class="btn btn-default radius" type="button" id="one2">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">指标开始刚到结束个数值</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" id="right1" name="right1" placeholder="" value="{$one.right}" class="input-text" style="width:180px;">&nbsp;
+					<input type="text" id="right1_money" name="right1_money" placeholder="请输入绩效金额" value="{$one.right_money}" class="input-text" style="width:180px;">&nbsp;
+					<button class="btn btn-default radius" type="button" id="one3">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">&nbsp;</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					绑定关系指标设置&nbsp;&nbsp;默认值从&nbsp; 0 &nbsp;开始与对应绩效奖励金额
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">指标开始刚到结束个数值</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" id="left2" name="left2" placeholder="" 
+					value="{$two.left}" class="input-text" style="width:180px;">&nbsp;
+					<input type="text" id="left2_money" name="left2_money" placeholder="请输入绩效金额" 
+					value="{$two.left_money}" class="input-text" style="width:180px;">&nbsp;
+					<button class="btn btn-default radius" type="button" id="two1">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">指标开始刚到结束个数值</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" id="middle2" name="middle2" placeholder="" 
+					value="{$two.middle}" class="input-text" style="width:180px;">&nbsp;
+					<input type="text" id="middle2_money" name="middle2_money" placeholder="请输入绩效金额" 
+					value="{$two.middle_money}" class="input-text" style="width:180px;">&nbsp;
+					<button class="btn btn-default radius" type="button" id="two2">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+				</div>
+			</div>
+			<!--  -->
+			<div class="row cl">
+				<label class="form-label col-xs-4 col-sm-2">指标开始刚到结束个数值</label>
+				<div class="formControls col-xs-8 col-sm-9">
+					<input type="text" id="right2" name="right2" placeholder="" 
+					value="{$two.right}" class="input-text" style="width:180px;">&nbsp;
+					<input type="text" id="right2_money" name="right2_money" placeholder="请输入绩效金额" 
+					value="{$two.right_money}" class="input-text" style="width:180px;">&nbsp;
+					<button class="btn btn-default radius" type="button" id="two3">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+				</div>
+			</div>
+
+      <!--  -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">助理指标个数</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" id="left3" name="left3" placeholder="" 
+          value="{$c.left}" class="input-text" style="width:368px;">&nbsp;
+          <button class="btn btn-default radius" type="button" id="c3">&nbsp;&nbsp;确定设置指标&nbsp;&nbsp;</button>
+        </div>
+      </div>
+
+		</div>
+	</form>
+</div>
+<include file="Common/foot" />
+<script src="__PUBLIC__/zhiyan/common/set.js"></script>
+</body>
+</html>
+<script>
+
+$("#one1").click(function(){
+   var left = $("#left1").val();
+   var money = $("#left1_money").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_one')}",
+        data: {"left":left,"left_money":money},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+$("#one2").click(function(){
+   var middle = $("#middle1").val();
+   var money = $("#middle1_money").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_one')}",
+        data: {"middle":middle,"middle_money":money},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+$("#one3").click(function(){
+   var right = $("#right1").val();
+   var money = $("#right1_money").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_one')}",
+        data: {"right":right,"right_money":money},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+$("#two1").click(function(){
+   var left = $("#left2").val();
+   var money = $("#left2_money").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_two')}",
+        data: {"left":left,"left_money":money},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+$("#two2").click(function(){
+   var middle = $("#middle2").val();
+   var money = $("#middle2_money").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_two')}",
+        data: {"middle":middle,"middle_money":money},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+$("#two3").click(function(){
+   var right = $("#right2").val();
+   var money = $("#right2_money").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_two')}",
+        data: {"right":right,"right_money":money},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+$("#c3").click(function(){
+   var left3 = $("#left3").val();
+   layer.confirm('确认要设置指标个数吗 ？',function(index){
+    $.ajax({
+        type: "post",
+        url: "{:U('Log/set_three')}",
+        data: {"left3":left3},
+        dataType:"json",
+        success:function(data){
+            if(data==200){
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }else{
+                layer.alert(data.info,{time:1000});
+                setInterval(function(){ location.href="{:U('Log/set')}"; },1000);
+            }
+        }
+    })
+  })
+})
+
+
+var page_url = {
+    "save_url1" : "{:U('Log/set_one')}",
+    "save_url2" : "{:U('Log/set_two')}",
+    "save_url3" : "{:U('Log/set_three')}",
+    "list_url" : "{:U('Log/set')}",
+
+}
+</script>

@@ -1,0 +1,59 @@
+<include file="Common/meta" />
+</head>
+<body>
+
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:180px;">关系名称</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="{$res.parent_name}" placeholder="请输入关系名称" 
+  				id="parent_name" name="parent_name" style="width:360px">
+  				<input type="hidden" name="member_id" value="{$res.member_id}">
+  			</div>
+  		</div>
+
+      <!-- select -->
+      <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2" style="width:180px;">选择成员</label>
+            <div class="formControls col-xs-8 col-sm-9" style="width:388px;"> 
+                <span class="select-box">
+                    <select name="parent_id" id="parent_id" class="select">
+                        <option value="">请选择成员</option>
+                        <volist name="member" id="v">
+                        <option value="{$v.member_id}" <eq name="v.member_id" value="$res.parent_id">
+                        selected</eq>>{$v.member_name}</option>
+                        </volist>
+                    </select>
+                </span> 
+            </div>
+        </div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<!-- common -->
+<script src="__PUBLIC__/zhiyan/js/open.js"></script>
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Member/member_parent_save')}",
+    'list_url' : "{:U('Member/member_list')}",
+}
+</script>

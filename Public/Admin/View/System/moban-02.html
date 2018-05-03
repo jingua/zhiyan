@@ -1,0 +1,200 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 模板管理
+  	<span class="c-gray en">&gt;</span> 添加数据模板
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">姓名</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="" placeholder="请输入姓名" 
+  				id="customer_name" name="customer_name">
+  			</div>
+  		</div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">公司名称</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入公司名称" 
+          id="customer_company" name="customer_company">
+        </div>
+      </div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">手机</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入手机" 
+          id="customer_tel" name="customer_tel">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">邮箱</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入邮箱" 
+          id="customer_email" name="customer_email">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">地址</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入地址" 
+          id="customer_address" name="customer_address">
+        </div>
+      </div>
+
+       <!-- select -->
+      <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;">性别</label>
+            <div class="formControls col-xs-8 col-sm-9"> 
+                <span class="select-box">
+                    <select name="member_sex" id="member_sex" class="select">
+                        <option value="0">请选择</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                        <option value="3">保密</option>
+                    </select>
+                </span> 
+            </div>
+        </div>
+
+	  <!-- 添加数据模板 -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">添加数据</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="显示数据" name="channel_name" >
+        </div>
+      </div>
+      <div style="margin-left:160px;margin-top:12px;">投放时间&nbsp;&nbsp;
+      	<input type="text" 
+    		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+    		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="" 
+    		style="width:180px;" name="">&nbsp;
+		    <span class="select-box" style="width:160px">
+            <select name="" id="time_text" class="select">
+                 <option value="none">未选择投放位置</option>
+                 <option value="first">头条</option>
+                 <option value="end">次条</option>
+            </select>
+        </span> 
+        &nbsp;&nbsp;
+        <span id="adddeliverytime{$v.channel_id}" class="add" style="cursor:pointer;">添加</span>
+      </div>
+      <div id="n"></div>
+
+		<!-- 添加数据模板 -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">支出项目</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$v.pay_name}" placeholder="请输入支出项目" 
+				name="pay_name[]" style="width:480px;">
+				<input type="text" class="input-text" value="{$v.pay_price}" placeholder="请输入支出款项" 
+				name="pay_price[]" style="width:280px;">&nbsp;&nbsp;
+				<span style="cursor:pointer;" id="ss">添加</span>
+			</div>
+		</div>
+		<div id="s"></div>
+
+
+      <!--textarea-->
+      <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;">备注</label>
+          <div class="formControls col-xs-8 col-sm-9"> 
+              <textarea name="descr" id="descr" style="height:280px;"></textarea>
+          </div>
+      </div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          <button 
+              onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<!-- common -->
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/ue/ueditor.config.js"></script>
+<script src="__PUBLIC__/lib/ue/ueditor.all.min.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+/* baidu editor */
+var ue = UE.getEditor("descr");
+
+/* common */
+var page_url = {
+    'save_url' : "{:U('Customer/customer_add_save')}",
+    'list_url' : "{:U('Customer/customer_list')}",
+}
+
+/* add */
+$().ready(function(){
+	/* add start */
+	var i = 0;
+    $('.add').click(function(){
+    var id = this.id.substr(15);
+    var str = '<div style="margin-top:12px;margin-bottom:10px;" id='+i+'>'+
+    '<label class="form-label col-xs-4 col-sm-2" style="width:160px;">&nbsp;</label>投放时间&nbsp;&nbsp;&nbsp;<input type="text"'+
+    'onfocus="WdatePicker({dateFmt:\'yyyy-MM-dd\',Date:\'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}\'})"'+
+    'id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value=""'+
+    'style="width:180px;" name="">&nbsp;&nbsp;<span class="select-box" style="width:160px">'+
+          '<select name="" id="time_text" class="select">'+
+               '<option value="none">未选择投放位置</option>'+
+               '<option value="first">头条</option>'+
+               '<option value="end">次条</option>'+
+          '</select>'+
+    '</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="cursor:pointer;" onclick="del('+i
+      +')">删除</span></div';
+    $("#n").before(str);
+    i++;
+    })
+    /* add end */
+    /* add start */
+    $("#ss").click(function(){
+     	var str = '<div class="row cl" id='+i+'>'+
+		'<label class="form-label col-xs-4 col-sm-2" style="width:160px;">&nbsp;</label>'+
+		'<div class="formControls col-xs-8 col-sm-9">'+
+		'<input type="text" class="input-text" value="" placeholder="请输入支出项目"'+
+		'name="pay_name[]" style="width:480px;">&nbsp;'+
+		'<input type="text" class="input-text" value="" placeholder="请输入支出款项"'+
+		'name="pay_price[]" style="width:280px;">&nbsp;&nbsp;&nbsp;'+
+		'<a onclick="del('+i+')" href="javascript:;">删除</a></div></div>'
+    $("#s").before(str);
+    i++;
+    });
+    /* add end */
+})
+
+/* delete */
+function del(val){
+  $("#"+val).remove();
+}
+</script>

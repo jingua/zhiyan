@@ -1,0 +1,153 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 成员管理 
+	<span class="c-gray en">&gt;</span> 成员列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		<form action="{:U('Member/member_list')}" method="post">
+		<!-- text -->
+		<input type="text" class="input-text" value="{$member.member_user}"
+		style="width:360px" name="member_user" placeholder="请输入帐号" />
+		<!-- select -->
+		<span class="select-box" style="width:160px;">
+			<select name="position_id" class="select">
+				<option value="">请选择类型</option>
+				<foreach name="position" item="v">
+				<option value="{$v.position_id}" 
+				<eq name="v.position_id" value="$member.position_id">selected</eq>>
+				{$v.position_name}</option>
+				</foreach>
+			</select>
+		</span> 
+		<!-- date -->
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" name="from" 
+		style="width:200px;" value="{$member.from}"> 
+		-
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$member.to}" 
+		style="width:200px;" name="to">
+		<!-- button -->
+		<button type="submit" class="btn btn-success radius" id="sousuo_user">
+		<i class="Hui-iconfont">&#xe665;</i> 搜索成员</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20" style="margin-top:6px;"> 
+		<span class="l">
+			<!-- delete -->
+			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+			<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+			<!-- add -->
+			<a href="{:U('Member/member_add')}" class="btn btn-success more_coupon">添加成员</a>
+		</span> 
+		<!-- total -->
+		<span class="r" style="line-height:30px;">
+			共有数据&nbsp;&nbsp;
+			<strong>{$member.total}</strong>&nbsp;&nbsp;条
+		</span> 
+	</div>
+	<div class="mt-20" style="margin-top:10px;">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="40"><input type="checkbox" name="" value=""></th>
+				<th>ID</th>
+				<th>帐号</th>
+				<th>联系电话</th>
+				<th>名字</th>
+				<th>邮箱</th>
+				<th>微信</th>
+				<th>登录次数</th>
+				<th>分配角色</th>
+				<th>角色名称</th>
+				<th>添加时间</th>
+				<th>操作</th>
+			</tr>
+		</thead> 
+		<tbody id="ks_user">
+			<foreach name="member.member" item="v">
+			<tr class="text-c">
+				<td>
+					<input type="checkbox" value="{$v.member_id}" name="dataid" 
+					id="dataid" _id="{$v.member_id}">
+				</td>
+				<td>{$v.member_id}</td>
+				<td>{$v.member_user}</td>
+				<td>{$v.member_tel}</td>
+				<td>{$v.member_name}</td>
+				<td>{$v.member_email}</td>
+				<td>{$v.member_wachat}</td>
+				<td>{$v.member_num}</td>
+				<td>
+					<!-- 编辑 -->
+					<a style="text-decoration:none" class="ml-5" 
+					href="{:U('Node/role_user',array('admin_id'=>$v['member_id']))}" title="分配角色">
+					<i class="Hui-iconfont">&#xe665;</i></a> 
+				</td>
+				<td>
+					<eq name="v.role_name" value="商务助理">
+						<a href="javascript:;" 
+							onclick="member_parent('绑定关系','{:U('Member/member_parent',array('id'=>$v['member_id']))}','','510')">{$v.role_name}</a>
+					<else/>
+						{$v.role_name}
+					</eq>
+				</td>
+				<td>{$v.member_time}</td>
+				<td class="td-manage">
+					<!-- edit -->
+					<a title="编辑" 
+						href="{:U('Member/member_mod',array('member_id'=>$v['member_id']))}" 
+						class="ml-5" style="text-decoration:none">
+						<i class="Hui-iconfont">&#xe6df;</i>
+					</a>&nbsp;&nbsp;
+					<!-- delete -->
+					<a style="text-decoration:none" class="ml-5" 
+						onClick="del(this,{$v['member_id']})" 
+						href="javascript:;" title="删除">
+						<i class="Hui-iconfont">&#xe6e2;</i>
+					</a>
+				</td>
+			</tr> 
+			</foreach>
+			<tr><td colspan=13 style="text-align:center;">{$member.link}</td></tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<!-- common -->
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+/*
+ * 绑定关系
+ * xiami
+ * 2018-04-03
+*/
+function member_parent(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+var page_url = {
+    'save_del' : "{:U('Member/member_del')}",
+    'list_url' : "{:U('Member/member_list')}",
+}
+</script>

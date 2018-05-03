@@ -1,0 +1,11 @@
+.opinionIpt{width:90%;padding:5px 5%;background:#fff; margin-top:10px;}
+.opinionIpt input{width:96%;padding:0 2%; height:32px;
+               border:none;}
+
+
+
+.opinionTxt{margin-top:10px;background:#fff;padding:10px 5%;width:90%;}
+.opinionTxt textarea{width:96%;padding:10px 2%;overflow-y:scroll;}
+
+.opinionImage{padding:10px 5%;}
+.opinionImage img{width:30%;}

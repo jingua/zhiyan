@@ -1,0 +1,175 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 业务管理
+  	<span class="c-gray en">&gt;</span> 编辑业务
+    <!-- 返回 -->
+    <span class="c-gray en" 
+        onClick="history.go(-1);" style="cursor:pointer;">&gt;&nbsp;&nbsp;返回
+    </span>
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">项目名称</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="{$business.business_name}" placeholder="请输入项目名称" 
+  				id="business_name" name="business_name">
+          <input type="hidden" name="business_id" value="{$business.business_id}">
+  			</div>
+  		</div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">项目总款</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$business.business_total}" placeholder="请输入项目总款" 
+          id="business_total" name="business_total">
+        </div>
+      </div>
+
+      <!-- select -->
+      <div class="row cl" onClick="cus1()">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;">选择客户</label>
+            <div class="formControls col-xs-8 col-sm-9 s11"> 
+                <input type="text" class="input-text" value="{$business.kehu}" placeholder="请选择客户名称" 
+          id="customer" name="customer">
+            </div>
+        </div>
+
+      <!-- text -->
+      <div class="row cl s2" style="display:none">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">&nbsp;</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入要搜索的客户" 
+          id="kehu" name="kehu">
+        </div>
+      </div>
+
+        <div class="row cl s1" style="display:none;">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;">&nbsp;</label>
+            <div class="formControls col-xs-8 col-sm-9"> 
+                <span class="select-box ssss">
+                    <select name="customer_id" id="test" class="select">
+                    <volist name="customer" id="v1">
+                        <option value="{$v1.customer_id}">{$v1.customer_company}</option>
+                    </volist>
+                    </select>
+                </span> 
+            </div>
+        </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">提醒结款时间</label>
+        <div class="formControls col-xs-8 col-sm-9">
+         <input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$business.remind_time}" 
+		style="width:280px;" name="remind_time">
+        </div>
+      </div>
+
+       <!-- text -->
+       <volist name="time" id="v">
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">渠道名称</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$v.channel_name}" id="channel_name" name="channel_name" disabled>
+          <input type="hidden" name="time_id[]" id="time_id" value="{$v.time_id}">
+        </div>
+      </div>
+
+      <div style="margin-left:160px;margin-top:12px;">
+      	投放时间&nbsp;&nbsp;( 如果还没确定暂时可以不填 )&nbsp;&nbsp;
+      	<input type="text" 
+    		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+    		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$v.time_time}" 
+    		style="width:180px;" name="time_time[]">
+		    <span class="select-box" style="width:160px">
+            <select name="time_text[]" id="time_text" class="select">
+                 <option value="first" <eq name="v.time_text" value="first">selected</eq>>头条</option>
+                 <option value="end" <eq name="v.time_text" value="end">selected</eq>>次条</option>
+            </select>
+        </span> 
+        &nbsp;
+      </div>
+      </volist>
+      <div></div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          <button 
+              onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Business/business_mod_save')}",
+    'list_url' : "{:U('Business/business_list')}",
+}
+
+/* 搜索客户显示功能 */
+function cus1(){
+  $(".s1").show();
+  $(".s2").show();
+}
+
+/* 追加时间表单 */
+window.onload = function(){
+   /* 给表单赋值 */
+   $(".ssss").click(function(){
+        var options = $("#test option:selected").text();
+        $("#customer").val(options);
+   });
+}
+
+/* 动态给客户赋值 */
+$("[name='kehu']").change(function(){
+    var kehu = $("#kehu").val();
+    $.ajax({
+        url:"{:U('Business/search_business')}",
+        data:"kehu="+kehu,
+        type:'post',
+        success:function(re){
+            var res=JSON.parse(re);
+            var key="";
+            for(var i=0;i<res.length;i++){
+               key+='<option value="'+ res[i].customer_id+'">'+ res[i].customer_company+'</option>';
+            }
+            $("[name='customer_id']").html(key);
+        }
+    })
+})
+
+/* 删除追加表单 */
+function del(val){
+  $("#"+val).remove();
+}
+
+</script>

@@ -1,0 +1,239 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 业务管理 
+	<span class="c-gray en">&gt;</span> 业务列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		<form action="{:U('Customer/customer_list')}" method="post">
+		<!-- text -->
+		<input type="text" class="input-text" value="{$customer.customer_brand}"
+		style="width:360px" name="customer_brand" placeholder="曾服务什么品牌" />
+		<!-- date -->
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" name="from" 
+		style="width:200px;" value="{$customer.from}"> 
+		-
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$customer.to}" 
+		style="width:200px;" name="to">
+		<!-- button -->
+		<button type="submit" class="btn btn-success radius" id="sousuo_user">
+		<i class="Hui-iconfont">&#xe665;</i> 搜规客户</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20" style="margin-top:6px;"> 
+		<span class="l">
+			<!-- delete -->
+			<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+			<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+			<!-- add -->
+			<a href="{:U('Business/channel_list')}" class="btn btn-success more_coupon">添加业务</a>
+		</span> 
+		<!-- total -->
+		<span class="r" style="line-height:30px;">
+			共有数据&nbsp;&nbsp;
+			<strong>{$business.total}</strong>&nbsp;&nbsp;条
+		</span> 
+	</div>
+	<div class="mt-20" style="margin-top:10px;">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="40"><input type="checkbox" name="" value=""></th>
+				<th>ID</th>
+				<th>项目名称</th>
+				<th>客户名称</th>
+				<th>项目总款</th>
+				<th>申请付款项</th>
+				<th>投放情况</th>
+				<th>创建日期</th>
+				<th>更新时间</th>
+				<th>提醒时间</th>
+				<th>成员名称</th>
+				<th>申请收款</th>
+				<th>支出管理</th>
+				<th>上传合同</th>
+				<th>查看合同</th>
+				<th>编辑</th>
+				<th>是否审核删除</th>
+			</tr>
+		</thead> 
+		<tbody id="ks_user">
+			<foreach name="business.business" item="v">
+			<tr class="text-c">
+				<td>
+					<input type="checkbox" value="{$v.member_id}" name="dataid" 
+					id="dataid" _id="{$v.customer_id}">
+				</td>
+				<td>{$v.business_id}</td>
+				<td>{$v.business_name}</td>
+				<td>{$v.customer_name}</td>
+				<td>{$v.business_total}</td>
+				<td>
+					<empty name="v.business_fkx">
+						无
+					<else /> 
+						有<span style="color:red;font-weight:bold"> {$v.business_fkx}元 </span>申请收款
+					</empty> 
+				</td>
+				<td><a href="{:U('Business/Business_time',array('business_id'=>$v['business_id']))}">查看投放情况</a></td>
+				<td>{$v.create_time}</td>
+				<td>{$v.update_time}</td>
+				<td>{$v.remind_time}</td>
+				<td>{$v.member_name}</td>
+				<!-- 申请收款 -->
+				<td>
+					<a href="javascript:;" onclick="business_price('申请收款','{:U('Business/business_price',array('id'=>$v['business_id']))}','','510')">
+					 <span class="label label-success radius">申请收款</span></a>
+				</td>
+				<!-- 支出管理 -->
+				<td>
+					<a href="javascript:;" onclick="business_pay('支出管理','{:U('Business/business_pay',array('id'=>$v['business_id']))}','','510')">
+					 <span class="label label-success radius">支出管理</span></a>
+				</td>
+				<!-- 上传合同 -->
+				<td>
+					<empty name="v.contract_id">
+						<a href="javascript:;" onclick="business_contract('上传合同','{:U('Business/business_contract',array('id'=>$v['business_id']))}','','510')">
+					 	<span class="label label-success radius">上传合同</span></a>
+					<else /> 
+						<a href="javascript:;" onclick="business_recontract('重新上传合同','{:U('Business/business_recontract',array('id'=>$v['business_id']))}','','510')">
+					 	<span class="label label-success radius">重新上传合同</span></a>
+					</empty> 
+				</td>
+				<!-- 查看合同 -->
+				<td>
+					<empty name="v.contract_id">
+					 	<span class="label label-success radius">暂无上传</span>
+					<else /> 
+						<a href="{$v['contract_dir']}" target="_blank"><span class="label label-success radius">查看合同</span></a>
+					</empty> 
+				</td>
+				<td class="td-manage">
+					<!-- edit -->
+					<a title="编辑" 
+						href="{:U('Business/business_mod',array('business_id'=>$v['business_id']))}" 
+						class="ml-5" style="text-decoration:none">
+						<i class="Hui-iconfont">&#xe6df;</i>
+					</a>
+				</td>
+				<td class="td-manage">
+					<!-- delete -->
+					<neq name="v.business_redel" value="2">
+						<a style="text-decoration:none" class="ml-5" 
+							onClick="redel(this,{$v['business_id']})" href="javascript:;" title="删除申请">
+							<span class="label label-success radius">删除申请</span>
+						</a>
+					</neq>
+					<eq name="v.business_redel" value="2">
+						<span class="label label-danger radius">删除正在审核中</span>
+					</eq>
+				</td>
+			</tr> 
+			</foreach>
+			<tr><td colspan=24 style="text-align:center;">{$business.link}</td></tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+
+/* delete one */
+function redel(obj,id){
+  layer.confirm("您确定要申请删除吗",function(index){
+	$.ajax({
+		type: "post",
+		url: "{:U('Business/business_redel')}",
+		data: {"id":id},
+		dataType: "json",
+		success:function(data){
+			if(data.ok==200){
+				layer.alert(data.info,{icon:1,time:1000});
+				setInterval(function(){ location.href="{:U('Business/business_list')}"; },1000);
+			}else{
+				layer.alert(data.info,{icon:2,time:1000});
+			}
+		}
+	})
+  })
+}
+
+
+/*var page_url = {
+    'save_redel' : "{:U('Business/business_redel')}",
+    'list_url' : "{:U('Customer/customer_list')}",
+}
+*/
+/*
+ * 申请收款
+ * xiami
+ * 2018-03-27
+*/
+function business_price(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*
+ * 支出管理
+ * xiami
+ * 2018-03-27
+*/
+function business_pay(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*
+ * 上传合同
+ * xiami
+ * 2018-03-27
+*/
+function business_contract(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*
+ * 重新上传合同
+ * xiami
+ * 2018-03-27
+*/
+function business_recontract(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+/*
+ * 申请删除
+ * xiami
+ * 2018-03-27
+*/
+function business_del(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+function business_show(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+</script>

@@ -1,0 +1,43 @@
+<include file="Common/meta" />
+</head>
+<body>
+
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">款项金额</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="" placeholder="请输入申请项目款项金额" 
+  				id="price_total" name="price_total" style="width:480px;">
+  				<input type="hidden" name="business_id" value="{$id}">
+  			</div>
+  		</div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/js/open.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Business/business_price_save')}",
+    'list_url' : "{:U('Business/business_list')}",
+}
+</script>

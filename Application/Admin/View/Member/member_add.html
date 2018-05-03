@@ -1,0 +1,138 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 成员管理
+  	<span class="c-gray en">&gt;</span> 添加成员
+    <!-- 返回 -->
+    <span class="c-gray en" 
+        onClick="history.go(-1);" style="cursor:pointer;">&gt;&nbsp;&nbsp;返回
+    </span> 
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">姓名</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="" placeholder="请输入姓名" 
+  				id="member_name" name="member_name">
+  			</div>
+  		</div>
+
+      <!-- select -->
+      <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;">性别</label>
+            <div class="formControls col-xs-8 col-sm-9"> 
+                <span class="select-box">
+                    <select name="member_sex" id="member_sex" class="select">
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </span> 
+            </div>
+        </div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">手机号</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入手机号" 
+          id="member_tel" name="member_tel">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">微信号</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入微信号" 
+          id="member_wachat" name="member_wachat">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">邮箱</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入邮箱" 
+          id="member_email" name="member_email">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">账号</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入账号" 
+          id="member_user" name="member_user">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">密码</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="password" class="input-text" value="" placeholder="请输入密码" 
+          id="member_pass" name="member_pass">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">确认密码</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="password" class="input-text" value="" placeholder="请输入确认密码" 
+          id="repass" name="repass">
+        </div>
+      </div>
+
+       <!-- select -->
+     <div class="row cl">
+           <label class="form-label col-xs-4 col-sm-2" style="width:160px;">职位</label>
+           <div class="formControls col-xs-8 col-sm-9"> 
+               <span class="select-box">
+                   <select name="role_id" id="role_id" class="select">
+                       <volist name="role" id="v">
+                       <option value="{$v.role_id}">{$v.role_name}</option>
+                       </volist>
+                   </select>
+               </span> 
+           </div>
+       </div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          <button 
+              onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<!-- common -->
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Member/member_add_save')}",
+    'list_url' : "{:U('Member/member_list')}",
+}
+</script>

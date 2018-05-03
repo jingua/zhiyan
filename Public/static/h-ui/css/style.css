@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* 你自己的样式 */
+/* 分页样式 */
+.num{
+	margin:0px 3px;
+	padding:2px 4px;
+	border:1px solid #0291d4;
+    background-color:white;
+}
+.current{
+	padding:2px 4px;
+    margin:2px 4px;
+    border:1px solid #0291d4;
+    color:white;
+    background-color:#0291d4;
+}
+.end{
+	display:none;
+}
+/* label 样式 */
+.label-w{
+	width:160px;
+}

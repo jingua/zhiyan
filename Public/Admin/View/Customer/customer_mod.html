@@ -1,0 +1,148 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 客户管理
+  	<span class="c-gray en">&gt;</span> 编辑客户
+    <!-- 返回 -->
+    <span class="c-gray en" 
+        onClick="history.go(-1);" style="cursor:pointer;">&gt;&nbsp;&nbsp;返回
+    </span>
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">联系人</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="{$customer.customer_name}" placeholder="请输入联系人" 
+  				id="customer_name" name="customer_name">
+  			</div>
+  		</div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">公司名称</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_company}" placeholder="请输入公司名" 
+          id="customer_company" name="customer_company">
+        </div>
+      </div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">手机</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_tel}" placeholder="请输入手机" 
+          id="customer_tel" name="customer_tel">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">QQ</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_qq}" placeholder="请输入QQ" 
+          id="customer_qq" name="customer_qq">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">微信</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_wechat}" placeholder="请输入微信" 
+          id="customer_wechat" name="customer_wechat">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">联系人职位</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_position}" placeholder="请输入联系人职位" 
+          id="customer_position" name="customer_position">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">邮箱</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_email}" placeholder="请输入邮箱" 
+          id="customer_email" name="customer_email">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">地址</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_address}" placeholder="请输入地址" 
+          id="customer_address" name="customer_address">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">沟通情况</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_situation}" placeholder="请输入沟通情况" 
+          id="customer_situation" name="customer_situation">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">曾服务什么品牌</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_brand}" placeholder="请输入曾服务什么品牌" 
+          id="customer_brand" name="customer_brand">
+        </div>
+      </div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">备注</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$customer.customer_mark}" placeholder="请输入备注" 
+          id="customer_mark" name="customer_mark">
+          <input type="hidden" name="customer_id" value="{$customer.customer_id}">
+        </div>
+      </div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          <button 
+              onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Customer/customer_mod_save')}",
+    'list_url' : "{:U('Customer/customer_list')}",
+}
+</script>

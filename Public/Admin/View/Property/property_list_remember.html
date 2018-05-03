@@ -1,0 +1,138 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 审核管理 
+	<span class="c-gray en">&gt;</span> 审核列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		<form action="{:U('Channel/channel_list')}" method="post">
+		
+		<!-- select -->
+		<span class="select-box" style="width:280px;">
+			<select name="type_id" class="select">
+				<option value="">收款审核</option>
+				<option value="">业务审核</option>
+				<option value="">渠道审核</option>
+				<option value="">收款记录</option>
+			</select>
+		</span> 
+		<!-- date -->
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" name="from" 
+		style="width:200px;" value="{$channel.from}"> 
+		-
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$channel.to}" 
+		style="width:200px;" name="to">
+		<!-- button -->
+		<button type="submit" class="btn btn-success radius" id="sousuo_user">
+		<i class="Hui-iconfont">&#xe665;</i> 搜规渠道</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20" style="margin-top:6px;"> 
+		<span class="l">
+			<!-- delete -->
+			<!-- <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+			<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> -->
+			<!-- add -->
+			<a href="{:U('Property/property_list')}" class="btn btn-success more_coupon">收款审核</a>
+			<a href="{:U('Property/property_list_remember')}" class="btn btn-danger radius">收款记录</a>
+			<a href="{:U('Property/business_list')}" class="btn btn-success more_coupon">业务审核</a>
+			<a href="{:U('Property/channel_list')}" class="btn btn-success more_coupon">渠道审核</a>
+			<a href="{:U('Property/pay_list')}" class="btn btn-success more_coupon">支出审核</a>
+			<a href="{:U('Property/pay_relist')}" class="btn btn-success">支出记录</a>
+			<a href="{:U('Property/contract_list')}" class="btn btn-success">合同审核</a>
+			<a href="{:U('Property/contract_relist')}" class="btn btn-success">合同记录</a>
+		</span> 
+		<!-- total -->
+		<span class="r" style="line-height:30px;">
+			共有数据&nbsp;&nbsp;
+			<strong>{$property.total}</strong>&nbsp;&nbsp;条
+		</span> 
+	</div>
+	<div class="mt-20" style="margin-top:10px;">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<!-- <th width="40"><input type="checkbox" name="" value=""></th> -->
+				<th>ID</th>
+				<th>项目名称</th>
+				<th>业务负责人</th>
+				<th>公司名</th>
+				<th>联系人</th>
+				<th>项目款项</th>
+				<th>未结款项</th>
+				<th>申请结算款项</th>
+				<th>结算时间</th>
+			</tr>
+		</thead> 
+		<tbody id="ks_user">
+			<foreach name="property.property" item="v">
+			<tr class="text-c">
+				<!-- <td>
+					<input type="checkbox" value="{$v.channel_id}" name="dataid" 
+					id="dataid" _id="{$v.channel_id}">
+				</td> -->
+				<td>{$v.property_id}</td>
+				<td>{$v.business_name}</td>
+				<td>{$v.member_name}</td>
+				<td>{$v.customer_company}</td>
+				<td>{$v.customer_name}</td>
+				<td>{$v.business_total}</td>
+				<td>{$v.business_wfk}</td>
+				<td style="color:red;">{$v.property_total}</td>
+				<td>{$v.update_time}</td>
+			</tr> 
+			</foreach>
+			<tr><td colspan=15 style="text-align:center;">{$property.link}</td></tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+    'save_del' : "{:U('Property/property_save')}",
+    'list_url' : "{:U('Property/property_list')}",
+}
+
+/* delete one */
+function del(obj,id){
+  layer.confirm("您确定要删除吗",function(index){
+	$.ajax({
+		type: "post",
+		url: page_url.save_del,
+		data: {"id":id},
+		dataType: "json",
+		success:function(data){
+			if(data.ok==200){
+				layer.alert(data.info,{icon:1,time:1000});
+				setInterval(function(){ location.href=page_url.list_url; },1000);
+			}else{
+				layer.alert(data.info,{icon:2,time:1000});
+			}
+		}
+	})
+  })
+}
+
+</script>

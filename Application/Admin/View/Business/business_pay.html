@@ -1,0 +1,115 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+     <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:100px;">添加支出</label>
+        <div class="formControls col-xs-8 col-sm-9" style="line-height:28px;">
+          <span style="cursor:pointer;" id="add">添加</span>
+        </div>
+      </div>
+
+		<volist name="pay" id="v">
+		<div class="row cl">
+			<div class="formControls col-xs-8 col-sm-9">
+        <label class="form-label col-xs-4 col-sm-2" style="width:100px;"></label>
+				<input type="text" class="input-text" value="{$v.pay_name}" placeholder="请输入支出项目" 
+				name="pay_name[]" style="width:180px;">
+				<input type="text" class="input-text" value="{$v.pay_price}" placeholder="请输入支出款项" 
+				name="pay_price[]" style="width:150px;">&nbsp;
+        <input type="hidden" name="pay_id[]" value="{$v.pay_id}">
+
+        <if condition="$v.pay_status eq 1"> 
+            <a style="text-decoration:none" class="ml-5" 
+            href="{:U('Business/pay_del',array('id'=>$v['pay_id'],'business_id'=>$v['business_id']))}">删除</a>
+            &nbsp;&nbsp;
+            <span style="color:red;">审核中</span>
+        <elseif condition="$v.pay_status eq 2"/>
+            <span style="color:green;">审核通过</span>
+        <else /> 
+            <a style="text-decoration:none" class="ml-5" 
+            href="{:U('Business/pay_del',array('id'=>$v['pay_id'],'business_id'=>$v['business_id']))}">删除</a>
+            &nbsp;&nbsp;
+            <span style="color:red;">审核未通过</span>
+        </if>
+			</div>
+		</div>
+		</volist>
+		 <div id="n"></div>
+
+     <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:100px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <input type="hidden" name="business_id" value="{$id}">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          </div>
+      </div>
+
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+
+/* 执行数据添加 */
+var is_submit = 0;
+$(".btn_submit").on("click", function(){
+if(is_submit == 1) return;
+is_submit = 1;
+$("#form-article-add").ajaxSubmit({
+      url: "{:U('Business/business_pay_save')}",
+      type: "POST",
+      dataType: "json",
+      beforeSend: function() {
+      },
+      error: function() {
+        layer.alert("服务器超时，请稍后再试",{icon:2,time:1000});
+        is_submit = 0;
+      },
+      success:function(data){
+        if(data.ok == 200){
+          layer.alert(data.info,{icon:1,time:1000});
+          setInterval(function(){ location.href = "{:U('Business/business_pay',array('id'=>$id))}"; },1000);
+        }else{
+          layer.alert(data.info,{icon:2,time:1000});
+        }
+        is_submit=0;
+      }
+    });
+});
+
+
+/*添加图片表单*/
+$().ready(function(){
+    var i = 0;
+    $("#add").click(function(){
+     	var str = '<div class="row cl" id='+i+'>'+
+		'<label class="form-label col-xs-4 col-sm-2" style="width:100px;"></label>'+
+		'<div class="formControls col-xs-8 col-sm-9">'+
+		'<input type="text" class="input-text" value="" placeholder="请输入支出项目"'+
+		'name="pay_name[]" style="width:180px;">&nbsp;'+
+		'<input type="text" class="input-text" value="" placeholder="请输入支出款项"'+
+		'name="pay_price[]" style="width:150px;">&nbsp;&nbsp;&nbsp;'+
+		'<a onclick="del('+i+')" href="javascript:;">删除</a></div></div>'
+    $("#n").before(str);
+    i++;
+    });
+  });
+
+/*删除图片表单*/
+function del(val){
+  $("#"+val).remove();
+}
+</script>

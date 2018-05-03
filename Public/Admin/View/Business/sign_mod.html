@@ -1,0 +1,162 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 业务管理
+  	<span class="c-gray en">&gt;</span> 添加业务
+    <!-- 返回 -->
+    <span class="c-gray en" 
+        onClick="history.go(-1);" style="cursor:pointer;">&gt;&nbsp;&nbsp;返回
+    </span>
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">合同名称</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="text" class="input-text" value="{$sign.sign_name}" placeholder="请输入合同名称" 
+  				id="sign_name" name="sign_name">
+          <input type="hidden" name="sign_id" value="{$sign.sign_id}">
+  			</div>
+  		</div>
+
+       <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">合同说明</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="{$sign.sign_text}" placeholder="请输入合同说明" 
+          id="sign_text" name="sign_text">
+        </div>
+      </div>
+
+     <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">上传合同</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="file" name="sign_pic[]" id="sign_pic[]">
+        </div>
+      </div>
+
+      <!-- select -->
+      <div class="row cl" onClick="cus1()">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;">选择客户</label>
+            <div class="formControls col-xs-8 col-sm-9 s11"> 
+                <input type="text" class="input-text" value="{$sign.customer_name}" placeholder="请选择客户名称"
+          id="customer" name="customer">
+            </div>
+        </div>
+
+      <!-- text -->
+      <div class="row cl s2" style="display:none">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">&nbsp;</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="text" class="input-text" value="" placeholder="请输入要搜索的客户" 
+          id="kehu" name="kehu">
+        </div>
+      </div>
+
+        <div class="row cl s1" style="display:none;">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;">&nbsp;</label>
+            <div class="formControls col-xs-8 col-sm-9"> 
+                <span class="select-box ssss">
+                    <select name="customer_id" id="test" class="select">
+                    <volist name="customer" id="v1">
+                        <option value="{$v1.customer_id}">{$v1.customer_company}</option>
+                    </volist>
+                    </select>
+                </span> 
+            </div>
+        </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">签约时间</label>
+        <div class="formControls col-xs-8 col-sm-9">
+         <input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择签约开始时间" value="<?php echo date('Y-m-d',$sign['sign_start_time']);?>" 
+		style="width:280px;" name="start_time">
+    --
+    <input type="text" 
+    onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+    id="datemin" class="input-text Wdate" placeholder="请选择签约结束时间" value="<?php echo date('Y-m-d',$sign['sign_end_time']);?>" 
+    style="width:280px;" name="end_time">
+        </div>
+      </div>
+
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          <button 
+              onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+    'save_url' : "{:U('Business/sign_mod_save')}",
+    'list_url' : "{:U('Business/sign_list')}",
+}
+
+/* 搜索客户显示功能 */
+function cus1(){
+  $(".s1").show();
+  $(".s2").show();
+}
+
+/* 追加时间表单 */
+window.onload = function(){
+   /* 给表单赋值 */
+   $(".ssss").click(function(){
+        var options = $("#test option:selected").text();
+        $("#customer").val(options);
+   });
+}
+
+/* 动态给客户赋值 */
+$("[name='kehu']").change(function(){
+    var kehu = $("#kehu").val();
+    $.ajax({
+        url:"{:U('Business/search_business')}",
+        data:"kehu="+kehu,
+        type:'post',
+        success:function(re){
+            var res=JSON.parse(re);
+            var key="";
+            for(var i=0;i<res.length;i++){
+               key+='<option value="'+ res[i].customer_id+'">'+ res[i].customer_company+'</option>';
+            }
+            $("[name='customer_id']").html(key);
+        }
+    })
+})
+
+/* 删除追加表单 */
+function del(val){
+  $("#"+val).remove();
+}
+
+</script>

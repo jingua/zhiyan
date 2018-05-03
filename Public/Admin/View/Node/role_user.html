@@ -1,0 +1,70 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+    <i class="Hui-iconfont">&#xe67f;</i> 首页 
+    <span class="c-gray en">&gt;</span> 权限管理 
+    <span class="c-gray en">&gt;</span> 分配角色
+    <!-- 刷新 -->
+    <a class="btn btn-success radius r" 
+        style="line-height:1.6em;margin-top:3px" 
+        href="javascript:location.replace(location.href);" title="刷新" >
+        <i class="Hui-iconfont">&#xe68f;</i>
+    </a>
+</nav>
+<!-- content -->
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add" method="post" enctype="multipart/form-data">
+		<!-- text -->
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2" style="width:150px;">用户名称</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text" value="{$admin.member_name}" placeholder="" 
+				id="admin_name" name="admin_name" disabled="disabled">
+				<input type="hidden" name="admin_id" value="{$admin.member_id}">
+			</div>
+		</div>
+		<!-- select -->
+		<div class="row cl" style="height:200px;">
+			<label class="form-label col-xs-4 col-sm-2" style="width:150px;">
+				角色名称
+			</label>
+			<div class="formControls col-xs-8 col-sm-9"> <span>
+				<select name="role_id[]" class="select" style="height:200px" multiple>
+					<foreach name="role" item="v">
+		            	<if condition="in_array($v[role_id],$role_id)">
+							<option value="{$v.role_id}" selected="selected">{$v.role_name}</option>
+						<else />
+							<option value="{$v.role_id}">{$v.role_name}</option>
+		            	</if>
+		            </foreach>
+				</select>
+				</span> 
+			</div>
+		</div>
+		<!-- button -->
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <button class="btn btn-primary radius btn_submit" type="button">
+                <i class="Hui-iconfont">&#xe632;</i> 保存并提交</button>
+                <button onClick="history.go(-1);" class="btn btn-default radius" type="button">&nbsp;返回&nbsp;</button>
+            </div>
+        </div>
+	</form>
+</article>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/common.js"></script>
+
+<script>
+$("select").focus();
+var page_url = {
+    'save_url' : "{:U('Node/role_user_save')}",
+    'list_url' : "{:U('Node/role_user',array('admin_id'=>$admin['member_id']))}",
+}
+
+</script>

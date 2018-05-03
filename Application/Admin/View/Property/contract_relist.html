@@ -1,0 +1,123 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i> 首页 
+	<span class="c-gray en">&gt;</span> 审核管理 
+	<span class="c-gray en">&gt;</span> 审核列表 
+	<!-- 刷新 -->
+	<a class="btn btn-success radius r" 
+		style="line-height:1.6em;margin-top:3px" 
+		href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+<!-- content -->
+<div class="page-container" style="margin-top:-30px;">
+	<div class="cl pd-5 mt-20">
+		<form action="{:U('Channel/channel_list')}" method="post">
+		
+		<!-- select -->
+		<span class="select-box" style="width:280px;">
+			<select name="type_id" class="select">
+				<option value="">收款审核</option>
+				<option value="">业务审核</option>
+				<option value="">渠道审核</option>
+				<option value="">收款记录</option>
+			</select>
+		</span> 
+		<!-- date -->
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" name="from" 
+		style="width:200px;" value="{$channel.from}"> 
+		-
+		<input type="text" 
+		onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',Date:'#F{$dp.$D(\'datemin\') or \'%y-%M-%d\'}'})" 
+		id="datemin" class="input-text Wdate" placeholder="请选择添加时间" value="{$channel.to}" 
+		style="width:200px;" name="to">
+		<!-- button -->
+		<button type="submit" class="btn btn-success radius" id="sousuo_user">
+		<i class="Hui-iconfont">&#xe665;</i> 搜规渠道</button>
+		</form>
+	</div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20" style="margin-top:6px;"> 
+		<span class="l">
+			<!-- delete -->
+			<!-- <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+			<i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> -->
+			<!-- add -->
+			<a href="{:U('Property/property_list')}" class="btn btn-success">收款审核</a>
+			<a href="{:U('Property/property_list_remember')}" class="btn btn-success">收款记录</a>
+			<a href="{:U('Property/business_list')}" class="btn btn-success">业务审核</a>
+			<a href="{:U('Property/channel_list')}" class="btn btn-success">渠道审核</a>
+			<a href="{:U('Property/pay_list')}" class="btn btn-success">支出审核</a>
+			<a href="{:U('Property/pay_relist')}" class="btn btn-success">支出记录</a>
+			<a href="{:U('Property/contract_list')}" class="btn btn-success">合同审核</a>
+			<a href="{:U('Property/contract_relist')}" class="btn btn-danger">合同记录</a>
+		</span> 
+		<!-- total -->
+		<span class="r" style="line-height:30px;">
+			共有数据&nbsp;&nbsp;
+			<strong>{$sign.total}</strong>&nbsp;&nbsp;条
+		</span> 
+	</div>
+	<div class="mt-20" style="margin-top:10px;">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<!-- <th width="40"><input type="checkbox" name="" value=""></th> -->
+				<th>ID</th>
+				<th>签约名称</th>
+				<th>签约时间</th>
+				<th>签约负责人</th>
+				<th>签约说明</th>
+				<th>创建时间</th>
+				<th>操作</th>
+			</tr>
+		</thead> 
+		<tbody id="ks_user">
+			<foreach name="sign.sign" item="v">
+			<tr class="text-c">
+				<!-- <td>
+					<input type="checkbox" value="{$v.channel_id}" name="dataid" 
+					id="dataid" _id="{$v.channel_id}">
+				</td> -->
+				<td>{$v.sign_id}</td>
+				<td>{$v.sign_name}</td>
+				<td>{$v.sign_start_time} -- {$v.sign_end_time}</td>
+				<td>{$v.member_name}</td>
+				<td>{$v.sign_text}</td>
+				<td>{$v.create_time}</td>
+				<td class="td-manage">
+					<eq name="v.sign_status" value="2">
+						<span class="label label-success radius">通过</span>
+					</a>
+					<else/>
+						<span class="label label-danger radius">未通过</span>
+					</eq>
+				</td>
+			</tr> 
+			</foreach>
+			<tr><td colspan=15 style="text-align:center;">{$sign.link}</td></tr>
+		</tbody>
+	</table>
+	</div>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+<script src="__PUBLIC__/zhiyan/common/property.js"></script>
+<script src="__PUBLIC__/lib/My97DatePicker/WdatePicker.js"></script> 
+
+<script>
+var page_url = {
+	'str1' : "确定要审核通过吗",
+	'str2' : "确定要审核不通过吗",
+    'save_del' : "{:U('Property/sign_del')}",
+    'save_redel' : "{:U('Property/sign_redel')}",
+    'list_url' : "{:U('Property/contract_list')}",
+}
+</script>

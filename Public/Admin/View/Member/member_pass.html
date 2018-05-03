@@ -1,0 +1,91 @@
+<include file="Common/meta" />
+</head>
+<body>
+<!-- menu -->
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 
+  	<span class="c-gray en">&gt;</span> 个人设置
+  	<span class="c-gray en">&gt;</span> 个人信息修改
+    <!-- 刷新 -->
+  	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" 
+  	href="javascript:location.replace(location.href);" title="刷新" >
+  	<i class="Hui-iconfont">&#xe68f;</i></a>
+</nav>
+<!-- content -->
+<div class="page-container">
+	<form method="post" class="form form-horizontal" action="#" 
+    id="form-article-add" enctype="multipart/form-data">
+
+      <!-- text -->
+  		<div class="row cl">
+  			<label class="form-label col-xs-4 col-sm-2" style="width:160px;">旧密码</label>
+  			<div class="formControls col-xs-8 col-sm-9">
+  				<input type="password" class="input-text" value="" placeholder="请输入旧密码" 
+  				id="old_pass" name="old_pass">
+  			</div>
+  		</div>
+
+        <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">新密码</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="password" class="input-text" value="" placeholder="请输入新密码" 
+          id="new_pass" name="new_pass">
+        </div>
+      </div>
+
+      <!-- text -->
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2" style="width:160px;">确认密码</label>
+        <div class="formControls col-xs-8 col-sm-9">
+          <input type="password" class="input-text" value="" placeholder="请输入确认密码" 
+          id="repass" name="repass">
+        </div>
+      </div>
+
+      <!-- button -->
+       <div class="row cl">
+          <label class="form-label col-xs-4 col-sm-2" style="width:160px;"></label>
+          <div class="formControls col-xs-8 col-sm-9">
+          <button class="btn btn-primary radius btn_submit" type="button">
+              <i class="Hui-iconfont">&#xe632;</i> 保存并提交
+          </button>
+          </div>
+      </div>
+	</form>
+</div>
+<include file="Common/foot" />
+</body>
+</html>
+
+
+
+<script>
+
+/*top.location.href="{:U('Index/login')}";*/
+
+var is_submit = 0;
+$(".btn_submit").on("click", function(){
+if(is_submit == 1) return;
+is_submit = 1;
+$("#form-article-add").ajaxSubmit({
+      url: "{:U('Member/member_pass_save')}",
+      type: "POST",
+      dataType: "json",
+      beforeSend: function() {
+      },
+      error: function() {
+        layer.alert("服务器超时，请稍后再试",{icon:2,time:1000});
+        is_submit = 0;
+      },
+      success:function(data){
+        if(data.ok == 200){
+          layer.alert(data.info,{icon:1,time:1000});
+          setInterval(function(){  top.location.href="{:U('Index/login')}"; },1000);
+        }else{
+          layer.alert(data.info,{icon:2,time:1000});
+        }
+        is_submit=0;
+      }
+    });
+});
+</script>
